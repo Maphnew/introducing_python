@@ -141,3 +141,198 @@ def change_local():
 
 change_local()
 
+print(animal)
+print(id(animal))
+
+animal = 'fruitbat'
+def change_and_print_global():
+	global animal
+	animal_before = animal
+	animal = 'wombat'
+	print('inside change_and_print_global: ', animal_before,' -> ',animal)
+
+print(animal)
+change_and_print_global()
+print(animal)
+
+animal = 'fruitbat'
+def change_local():
+	animal = 'wombat' # local variable
+	print('locals: ', locals())
+
+print(animal)
+change_local()
+
+print('globals: ', globals())
+print(animal)
+
+### 4.10.1 이름에 _와 __ 사용
+# function.__name__
+# function.__doc__
+
+def amazing():
+	'''This is the amazing function.
+	Want to see it again?'''
+	print('This function is named: ', amazing.__name__)
+	print('And its docstring is: ', amazing.__doc__)
+
+amazing()
+
+### 4.11 error 처리하기: try, except
+
+short_list = [1,2,3]
+position = 5
+try:
+	short_list[position]
+except:
+	print('Need a position between 0 and ', len(short_list)-1, ' but got ',
+		 position)
+
+# short_list = [1,2,3]
+# while True:
+# 	value = input('Position [q to quit]? ')
+# 	if value == 'q':
+# 		break
+# 	try:
+# 		position = int(value)
+# 		print(short_list[position])
+# 	except IndexError as err:
+# 		print('Bad index: ', position)
+# 	except Exception as other:
+# 		print('Something else broke: ', other)
+
+### 4.12 예외 만들기 
+
+# class UppercaseException(Exception):
+# 	pass
+class OopsException(Exception):
+	pass
+
+# words = ['eeenie', 'meenie', 'miny', 'MO']
+# for word in words:
+# 	if word.isupper():
+# 		raise UppercaseException(word)
+
+try:
+	raise OopsException('panic')
+except OopsException as exc:
+	print(exc)
+
+### 4.13 연습문제
+# 4.1
+guess_me = 7
+if guess_me < 7:
+	print('too low')
+elif guess_me > 7:
+	print('too high')
+else:
+	print('just right')
+
+# 4.2
+guess_me = 7
+start = 1
+while True:
+	if guess_me < start:
+		print('too low')
+	elif guess_me == start:
+		print('found it!')
+		break
+	elif guess_me > start:
+		print('oops')
+	start += 1
+
+# 4.3
+a_list = []
+for i in range(4):
+	a_list.append(3-i)
+print(a_list)
+
+# 4.4
+b_list = [a for a in range(10) if a%2==0]
+print(b_list)
+# 4.5
+squares = {a:a*a for a in range(10)}
+print(squares)
+# 4.6
+set_a = {a for a in range(10) if a%2!=0}
+print(type(set_a))
+print(set_a)
+
+# 4.7
+got = (a for a in range(10))
+print('Got ', list(got))
+
+got = (a for a in range(10))
+for i in got:
+	print('Got ', i)
+
+for n in ('Got!!! %s' % number for number in range(10)):
+	print(n)
+
+# 4.8
+def good():
+	list_a = ['Harry','Ron','Hermione']
+	return list_a
+
+print(good())
+
+# 4.9
+def get_odds(first=0, last=10, step=2):
+	number = first+1
+	while number < last:
+		yield number
+		number += step
+
+go = get_odds(0,10)
+print(go)
+
+for x in go:
+	print(x)
+
+def get_odds2():
+	for number in range(1,10,2):
+		yield number
+
+for count, number in enumerate(get_odds2(), 1):
+	if count == 3:
+		print("The third odd number is ", number)
+		break
+
+my_list = ['a', 'b', 'c']
+counter_list = list(enumerate(my_list,1))
+print(counter_list)
+print(type(counter_list[0]))
+
+# 4.10
+def test(func):
+	def new_func(*args, **kwargs):
+		print('start')
+		result = func(*args, **kwargs)
+		print('end')
+		return result
+	return new_func
+
+@test
+def greeting():
+	print("Greetings, Eathling")
+
+greeting()
+
+# 4.11 
+class OopsException(Exception):
+	pass
+
+try:
+	raise OopsException('panic')
+except OopsException as exp:
+	print('Caught an oops! ', exp)
+
+# 4.12
+titles = ['Creature of Habit', 'Crewel Fate']
+plots = ['A nun turns into a mon ster', 'A haunt yarn shop']
+
+dic = {t:p for t,p in zip(titles,plots)}
+print(dic)
+
+movies = dict(zip(titles,plots))
+print(movies)
