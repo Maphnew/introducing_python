@@ -107,3 +107,53 @@ db = dbm.open('definitions', 'r')
 print(db['mustard'])
 # 8.5.2 Memcached
 # 8.5.3 Redis
+
+import redis
+conn = redis.Redis('localhost', 6379)
+print(conn.keys('*'))
+#conn.set('secret', 'ni!')
+#conn.set('carats', 24)
+#print(conn.set('fever', '101.5'))
+
+#print(conn.get('secret'))
+#print(conn.get('carats'))
+#print(conn.get('fever'))
+
+#print(conn.setnx('secret', 'icky-icky'))
+#print(conn.getset('secret', 'icky-icky'))
+
+#print(conn.getrange('secret', -6, -1))
+#print(conn.setrange('secret', 0, 'ICKY'))
+#print(conn.get('secret'))
+
+#print(conn.mset({'pie':'cherry', 'cordial':'sherry'}))
+#print(conn.mget(['fever','carats']))
+# print(conn.delete('fever'))
+# print(conn.incr('carats'))
+# print(conn.incr('carats',10))
+# print(conn.decr('carats'))
+# print(conn.decr('carats',15))
+# print(conn.keys('*'))
+
+# print(conn.set('fever', '101.5'))
+# print(conn.incrbyfloat('fever'))
+# print(conn.incrbyfloat('fever', 0.5))
+
+#print(conn.incrbyfloat('fever', -2.0))
+
+# 리스트
+#print(conn.lpush('zoo','bear'))
+#print(conn.lpush('zoo','alligater','duck'))
+# print(conn.linsert('zoo','before','bear','beaver'))
+# print(conn.linsert('zoo','after','bear','cassowary'))
+
+#print(conn.lset('zoo', 2, 'marmoset'))
+#print(conn.rpush('zoo','yak'))
+
+#print(conn.lindex('zoo',3))
+#print(conn.lrange('zoo', 0,2))
+
+#print(conn.ltrim('zoo',1,4))
+#print(conn.lrange('zoo', 0,-1))
+
+# 해시
